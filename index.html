@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio de Thiago Cascaes — QA Engineer com foco em testes manuais, automação web, Cypress, Postman e qualidade de software." />
+  <meta name="theme-color" content="#0a0a0f" />
+  <title>Thiago Cascaes | QA Engineer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-soft: #0e1016;
+      --surface: #11141b;
+      --surface-2: #151923;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(117, 229, 255, 0.22);
+      --text: #f4f7fb;
+      --muted: #99a4b3;
+      --muted-2: #6f7a89;
+      --accent: #75e5ff;
+      --accent-soft: rgba(117, 229, 255, 0.1);
+      --accent-glow: rgba(117, 229, 255, 0.16);
+      --max-width: 1160px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 78% 10%, rgba(117, 229, 255, 0.055), transparent 28rem),
+        linear-gradient(180deg, #0a0a0f 0%, #0b0c11 60%, #090a0e 100%);
+      color: var(--text);
+      font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    ::selection {
+      background: rgba(117, 229, 255, 0.22);
+      color: #fff;
+    }
+
+    .container {
+      width: min(calc(100% - 36px), var(--max-width));
+      margin-inline: auto;
+    }
+
+    .section {
+      position: relative;
+      padding: 96px 0;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-family: "Outfit", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      box-shadow: 0 0 14px var(--accent);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Outfit", system-ui, sans-serif;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      max-width: 760px;
+      font-size: clamp(2rem, 6vw, 3.65rem);
+      font-weight: 600;
+    }
+
+    .section-intro {
+      max-width: 700px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+      transform: translateY(-150%);
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #061014;
+      font-weight: 700;
+      transition: transform var(--transition);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    /* NAV */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .site-header.scrolled {
+      background: rgba(10, 10, 15, 0.76);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      box-shadow: inset 0 0 22px rgba(117, 229, 255, 0.04);
+      font-size: 0.78rem;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.045);
+      outline: none;
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    .menu-button {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: rgba(255,255,255,.025);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: grid;
+      grid-template-rows: 0fr;
+      width: min(calc(100% - 36px), var(--max-width));
+      margin: 0 auto;
+      overflow: hidden;
+      transition: grid-template-rows 260ms ease, padding 260ms ease;
+    }
+
+    .mobile-menu.open {
+      grid-template-rows: 1fr;
+      padding-bottom: 14px;
+    }
+
+    .mobile-menu-inner {
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 14px;
+      background: rgba(15, 17, 23, 0.96);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 13px 15px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: 0;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 128px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.025);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px var(--accent);
+    }
+
+    .hero h1 {
+      max-width: 860px;
+      font-size: clamp(3rem, 13vw, 7.2rem);
+      font-weight: 600;
+      letter-spacing: -0.055em;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: clamp(1.42rem, 5.6vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-summary {
+      max-width: 660px;
+      margin-top: 28px;
+      color: #aeb7c4;
+      font-size: clamp(1.05rem, 2.4vw, 1.26rem);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-family: "Outfit", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      border-color: rgba(117, 229, 255, 0.58);
+      background: var(--accent);
+      color: #071014;
+      box-shadow: 0 12px 34px rgba(117, 229, 255, 0.12);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 15px 38px rgba(117, 229, 255, 0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.025);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-strong);
+      background: rgba(117, 229, 255, 0.05);
+    }
+
+    .hero-visual {
+      position: relative;
+      width: min(100%, 470px);
+      aspect-ratio: 1;
+      margin-inline: auto;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .hero-visual::before,
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .hero-visual::before {
+      inset: 11%;
+      border: 1px solid rgba(117, 229, 255, 0.17);
+      box-shadow: inset 0 0 80px rgba(117, 229, 255, 0.03);
+      animation: rotate 28s linear infinite;
+    }
+
+    .hero-visual::after {
+      inset: 24%;
+      border: 1px dashed rgba(255,255,255,.12);
+      animation: rotateReverse 22s linear infinite;
+    }
+
+    .visual-core {
+      width: 44%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-strong);
+      border-radius: 28%;
+      background:
+        linear-gradient(145deg, rgba(117,229,255,.1), rgba(255,255,255,.015)),
+        var(--surface);
+      box-shadow: 0 30px 100px rgba(0,0,0,.32), inset 0 0 50px rgba(117,229,255,.04);
+      color: var(--accent);
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(2rem, 8vw, 4.4rem);
+      font-weight: 600;
+      letter-spacing: -0.07em;
+    }
+
+    .orbit-label {
+      position: absolute;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(10,10,15,.88);
+      color: var(--muted);
+      font-size: 0.76rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .orbit-label:nth-of-type(2) { top: 12%; left: 4%; }
+    .orbit-label:nth-of-type(3) { right: 1%; top: 28%; }
+    .orbit-label:nth-of-type(4) { bottom: 14%; left: 9%; }
+    .orbit-label:nth-of-type(5) { bottom: 7%; right: 10%; }
+
+    @keyframes rotate { to { transform: rotate(360deg); } }
+    @keyframes rotateReverse { to { transform: rotate(-360deg); } }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      gap: 30px;
+      margin-top: 42px;
+    }
+
+    .about-copy {
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,.026), rgba(255,255,255,.012));
+      box-shadow: var(--shadow);
+    }
+
+    .about-copy p {
+      color: #b1bac7;
+      font-size: 1.06rem;
+    }
+
+    .about-copy p + p {
+      margin-top: 18px;
+    }
+
+    .about-aside {
+      display: grid;
+      gap: 16px;
+    }
+
+    .metric {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-family: "Outfit", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 500;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted-2);
+      font-size: 0.92rem;
+    }
+
+    .skills-wrap {
+      margin-top: 34px;
+    }
+
+    .skills-title {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .skill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.022);
+      color: #c4ccd6;
+      font-size: 0.91rem;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .skill::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .8;
+    }
+
+    .skill:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+      background: var(--accent-soft);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .project-card {
+      position: relative;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: 0 16px 45px rgba(0,0,0,.16);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .project-card[data-pattern="grid"]::before {
+      background:
+        linear-gradient(rgba(117,229,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(117,229,255,.045) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: linear-gradient(135deg, transparent 20%, black 100%);
+    }
+
+    .project-card[data-pattern="dots"]::before {
+      background-image: radial-gradient(circle, rgba(117,229,255,.12) 1px, transparent 1.2px);
+      background-size: 16px 16px;
+      mask-image: linear-gradient(135deg, transparent 26%, black 100%);
+    }
+
+    .project-card[data-pattern="lines"]::before {
+      background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(117,229,255,.045) 14px 15px);
+      mask-image: linear-gradient(135deg, transparent 20%, black 100%);
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(117, 229, 255, 0.32);
+      box-shadow: 0 24px 70px rgba(0,0,0,.28), 0 0 0 1px rgba(117,229,255,.035);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-top,
+    .project-content,
+    .project-footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .project-index {
+      color: var(--muted-2);
+      font-family: "Outfit", sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: .08em;
+    }
+
+    .language-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 9px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .language-pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(117,229,255,.5);
+    }
+
+    .project-card h3 {
+      font-size: clamp(1.42rem, 4vw, 2rem);
+      font-weight: 550;
+    }
+
+    .project-card p {
+      margin-top: 14px;
+      color: var(--muted);
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 22px;
+    }
+
+    .stack span {
+      padding: 5px 8px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: #aab4c0;
+      font-size: 0.79rem;
+    }
+
+    .project-footer {
+      margin-top: auto;
+      padding-top: 28px;
+    }
+
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--text);
+      font-family: "Outfit", sans-serif;
+      font-size: .92rem;
+      font-weight: 500;
+    }
+
+    .repo-link svg {
+      transition: transform var(--transition);
+    }
+
+    .repo-link:hover {
+      color: var(--accent);
+    }
+
+    .repo-link:hover svg {
+      transform: translate(3px, -3px);
+    }
+
+    /* EXPERIENCE */
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 18px;
+      bottom: 18px;
+      width: 1px;
+      background: linear-gradient(var(--accent), rgba(255,255,255,.06));
+      opacity: .34;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 18px;
+    }
+
+    .timeline-dot {
+      position: relative;
+      z-index: 1;
+      width: 9px;
+      height: 9px;
+      margin: 25px auto 0;
+      border: 2px solid var(--bg);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(117,229,255,.1), 0 0 20px rgba(117,229,255,.22);
+    }
+
+    .timeline-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .timeline-card:hover {
+      transform: translateX(3px);
+      border-color: var(--border-strong);
+    }
+
+    .timeline-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 16px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-company {
+      color: var(--accent);
+      font-size: .86rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .timeline-period {
+      color: var(--muted-2);
+      font-size: .86rem;
+    }
+
+    .timeline-card h3 {
+      font-size: 1.32rem;
+      font-weight: 500;
+    }
+
+    .timeline-card p {
+      margin-top: 10px;
+      color: var(--muted);
+    }
+
+    .note {
+      margin-top: 20px;
+      padding-left: 48px;
+      color: var(--muted-2);
+      font-size: .88rem;
+    }
+
+    /* CONTACT */
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 6vw, 56px);
+      border: 1px solid var(--border-strong);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 90% 20%, rgba(117,229,255,.07), transparent 22rem),
+        linear-gradient(145deg, rgba(255,255,255,.034), rgba(255,255,255,.012));
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      right: -90px;
+      bottom: -120px;
+      border: 1px solid rgba(117,229,255,.16);
+      border-radius: 50%;
+    }
+
+    .contact-panel h2 {
+      max-width: 830px;
+    }
+
+    .contact-panel p {
+      max-width: 700px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 28px 0 38px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--muted-2);
+      font-size: .9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 650ms ease, transform 650ms cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ACCESSIBILITY */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* BREAKPOINTS */
+    @media (min-width: 720px) {
+      .container {
+        width: min(calc(100% - 56px), var(--max-width));
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .project-card:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .footer-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: inline-flex;
+      }
+
+      .menu-button,
+      .mobile-menu {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.35fr) minmax(330px, .65fr);
+        gap: 48px;
+      }
+
+      .about-grid {
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .project-card:first-child {
+        grid-column: auto;
+      }
+
+      .section {
+        padding: 118px 0;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .site-header.menu-open {
+        background: rgba(10, 10, 15, 0.94);
+        backdrop-filter: blur(18px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header" id="siteHeader">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="Thiago Cascaes — início">
+        <span class="brand-mark">TC</span>
+        <span>Thiago Cascaes</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#experiencia">Experiência</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+
+      <a class="btn btn-secondary nav-cta" href="https://www.linkedin.com/in/thiago0cascaes/" target="_blank" rel="noreferrer">
+        LinkedIn
+        <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">
+            <span class="status-dot"></span>
+            Quality Assurance · Automação de Testes
+          </div>
+
+          <h1>
+            Thiago Cascaes
+            <span>QA Engineer</span>
+          </h1>
+
+          <p class="hero-summary">
+            Profissional focado em qualidade de software, testes manuais e automação web.
+            Desenvolvo cenários de teste confiáveis com Cypress e Postman, conectando visão de usuário,
+            investigação de falhas e boas práticas ágeis para entregar software com mais segurança.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projetos">
+              Ver Projetos
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M14 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/thiago0cascaes/" target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+
+            <a class="btn btn-secondary" href="https://github.com/thiagocascaes" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="visual-core">TC</div>
+          <span class="orbit-label">Cypress</span>
+          <span class="orbit-label">Postman</span>
+          <span class="orbit-label">API Testing</span>
+          <span class="orbit-label">E2E</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-label">Sobre mim</span>
+          <h2>Qualidade pensada como parte do produto, não como etapa final.</h2>
+          <p class="section-intro">
+            Meu foco está em entender o comportamento esperado de uma aplicação, transformar requisitos
+            em cenários objetivos e criar testes que ajudem o time a encontrar problemas antes que eles
+            cheguem ao usuário.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-copy reveal">
+            <p>
+              Atuo na construção de repertório prático em Quality Assurance, combinando testes funcionais,
+              automação end-to-end, validação de APIs e documentação de defeitos. Em meus projetos de estudo
+              e portfólio, trabalho com aplicações React e fluxos próximos de cenários reais, explorando
+              autenticação, transações, componentes, integrações e comportamento de interface.
+            </p>
+            <p>
+              Minha abordagem busca equilíbrio entre técnica e clareza: casos de teste bem definidos,
+              evidências reproduzíveis, priorização por impacto e automações que façam sentido para o fluxo
+              de entrega. Também aplico conceitos de Scrum, Agile e CI/CD para integrar qualidade ao processo
+              de desenvolvimento.
+            </p>
+
+            <div class="skills-wrap">
+              <div class="skills-title">Competências técnicas</div>
+              <div class="skills" aria-label="Competências técnicas">
+                <span class="skill">Testes Manuais</span>
+                <span class="skill">Cypress</span>
+                <span class="skill">Postman</span>
+                <span class="skill">API Testing</span>
+                <span class="skill">Testes E2E</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">TypeScript</span>
+                <span class="skill">React</span>
+                <span class="skill">Git &amp; GitHub</span>
+                <span class="skill">CI/CD</span>
+                <span class="skill">Scrum</span>
+                <span class="skill">Agile</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="about-aside reveal" aria-label="Destaques profissionais">
+            <div class="metric">
+              <strong>QA Engineer</strong>
+              <span>Posicionamento profissional atual</span>
+            </div>
+            <div class="metric">
+              <strong>Web + API</strong>
+              <span>Validação de interface, fluxos e serviços</span>
+            </div>
+            <div class="metric">
+              <strong>Automação</strong>
+              <span>Cypress aplicado a cenários reais</span>
+            </div>
+            <div class="metric">
+              <strong>Agile mindset</strong>
+              <span>Qualidade integrada ao ciclo de entrega</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projetos">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-label">Projetos</span>
+          <h2>Prática aplicada em automação e qualidade de software.</h2>
+          <p class="section-intro">
+            Repositórios que demonstram uso de Cypress em aplicações React, testes de interface,
+            API, componentes e fluxos end-to-end.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card reveal" data-pattern="grid">
+            <div class="project-top">
+              <span class="project-index">01 / AUTOMATION</span>
+              <span class="language-pill">TypeScript</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Cypress Real World App</h3>
+              <p>
+                Aplicação de pagamentos usada como ambiente de prática para testes próximos do mundo real.
+                O projeto permite validar autenticação, transações e diferentes camadas da aplicação,
+                incluindo UI, API, componentes e cobertura de código.
+              </p>
+
+              <div class="stack" aria-label="Stack do projeto">
+                <span>Cypress</span>
+                <span>TypeScript</span>
+                <span>React</span>
+                <span>Express</span>
+                <span>Material UI</span>
+                <span>lowdb</span>
+                <span>CI/CD</span>
+              </div>
+            </div>
+
+            <div class="project-footer">
+              <a class="repo-link" href="https://github.com/thiagocascaes/cypress-realworld-app" target="_blank" rel="noreferrer">
+                Abrir repositório
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-pattern="dots">
+            <div class="project-top">
+              <span class="project-index">02 / FRONTEND TEST</span>
+              <span class="language-pill">JavaScript</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Post Comment React App</h3>
+              <p>
+                Aplicação React simples voltada a comentários em posts. O repositório é utilizado
+                para praticar automação de testes sobre uma interface moderna, com ambiente Vite e
+                execução de cenários Cypress.
+              </p>
+
+              <div class="stack" aria-label="Stack do projeto">
+                <span>React</span>
+                <span>JavaScript</span>
+                <span>Vite</span>
+                <span>Cypress</span>
+                <span>date-fns</span>
+              </div>
+            </div>
+
+            <div class="project-footer">
+              <a class="repo-link" href="https://github.com/thiagocascaes/post-comment-react-app" target="_blank" rel="noreferrer">
+                Abrir repositório
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-pattern="lines">
+            <div class="project-top">
+              <span class="project-index">03 / FULL-STACK QA</span>
+              <span class="language-pill">TypeScript</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Cypress Heroes</h3>
+              <p>
+                Demo full-stack construída para exercitar diferentes estratégias de teste com Cypress.
+                Reúne testes end-to-end, de componente e de API em uma arquitetura com frontend React
+                e backend NestJS.
+              </p>
+
+              <div class="stack" aria-label="Stack do projeto">
+                <span>Cypress</span>
+                <span>TypeScript</span>
+                <span>React</span>
+                <span>Vite</span>
+                <span>NestJS</span>
+                <span>Prisma</span>
+                <span>API Testing</span>
+              </div>
+            </div>
+
+            <div class="project-footer">
+              <a class="repo-link" href="https://github.com/thiagocascaes/cypress-heroes" target="_blank" rel="noreferrer">
+                Abrir repositório
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experiencia">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-label">Experiência profissional</span>
+          <h2>Experiência de negócio somada à transição prática para tecnologia.</h2>
+          <p class="section-intro">
+            O histórico público disponível mostra experiência na Lanchar e uma trajetória atual
+            direcionada a Quality Assurance, sustentada por projetos técnicos e estudo contínuo.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-company">Portfólio técnico</span>
+                <span class="timeline-period">Atual</span>
+              </div>
+              <h3>QA Engineer · Projetos de Qualidade e Automação</h3>
+              <p>
+                Desenvolvimento de projetos práticos com Cypress, testes manuais, validação de APIs,
+                automação web e documentação de cenários. Foco em testes funcionais, E2E, componentes,
+                fluxos críticos e integração da qualidade ao processo de entrega.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-company">Lanchar</span>
+                <span class="timeline-period">Experiência anterior</span>
+              </div>
+              <h3>Gestão e Operações</h3>
+              <p>
+                Experiência profissional ligada à operação de negócio, atendimento e gestão.
+                Registros públicos de 2021 descrevem atuação conjunta na administração de unidades
+                da Lanchar em Tubarão, com uso de soluções digitais no fluxo de atendimento e delivery.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <p class="note reveal">
+          Observação: o LinkedIn limita a exibição pública de detalhes como cargos, períodos e descrições completas.
+          Por isso, esta seção utiliza apenas informações publicamente verificáveis, sem estimar datas ou funções não confirmadas.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <span class="section-label">Contato</span>
+          <h2>Qualidade começa com boas perguntas e termina com mais confiança no produto.</h2>
+          <p>
+            Estou aberto a conexões profissionais, oportunidades em QA e conversas sobre testes,
+            automação e qualidade de software. Você pode falar comigo pelo LinkedIn ou acompanhar meus projetos no GitHub.
+          </p>
+
+          <div class="contact-links">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/thiago0cascaes/" target="_blank" rel="noreferrer">
+              Falar pelo LinkedIn
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="btn btn-secondary" href="https://github.com/thiagocascaes" target="_blank" rel="noreferrer">
+              Ver GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p>© <span id="currentYear"></span> Thiago Cascaes. Portfólio profissional.</p>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/thiago0cascaes/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/thiagocascaes" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const header = document.getElementById("siteHeader");
+      const menuButton = document.getElementById("menuButton");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      const sections = [...document.querySelectorAll("main section[id]")];
+      const year = document.getElementById("currentYear");
+
+      year.textContent = new Date().getFullYear();
+
+      const updateHeader = () => {
+        header.classList.toggle("scrolled", window.scrollY > 16);
+      };
+
+      updateHeader();
+      window.addEventListener("scroll", updateHeader, { passive: true });
+
+      menuButton.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("open");
+        header.classList.toggle("menu-open", isOpen);
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+      });
+
+      mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("open");
+          header.classList.remove("menu-open");
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.setAttribute("aria-label", "Abrir menu");
+        });
+      });
+
+      const revealItems = document.querySelectorAll(".reveal");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        revealItems.forEach(item => item.classList.add("visible"));
+      } else {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14 });
+
+        revealItems.forEach((item, index) => {
+          item.style.transitionDelay = `${Math.min(index % 3, 2) * 70}ms`;
+          revealObserver.observe(item);
+        });
+      }
+
+      if ("IntersectionObserver" in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const id = entry.target.id;
+            navLinks.forEach(link => {
+              link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+            });
+          });
+        }, {
+          rootMargin: "-40% 0px -52% 0px",
+          threshold: 0
+        });
+
+        sections.forEach(section => sectionObserver.observe(section));
+      }
+    })();
+  </script>
+</body>
+</html>
