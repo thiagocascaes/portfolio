@@ -26,13 +26,10 @@ Meu foco é contribuir para a entrega de softwares com mais **qualidade, confiab
 * 🌐 Testes de API
 * 💻 Testes Web
 * 📝 Gherkin
-* 🥒 Cucumber
 * 🔄 Git / GitHub
 * ⚙️ GitHub Actions
 * 🚀 CI/CD
-* 📋 Notion
-* 🔎 DevTools
-
+  
 ---
 
 ## 🔍 Conhecimentos em QA
@@ -76,43 +73,6 @@ Durante meus estudos e projetos, venho trabalhando com:
 * STLC
 * CI/CD
 * Pipeline de testes
-
----
-
-## 🤖 Automação de Testes
-
-Tenho desenvolvido projetos utilizando **Cypress** para automatizar fluxos importantes de aplicações web, aplicando conceitos como:
-
-* Page Objects
-* Custom Commands
-* Seletores
-* Assertions
-* Hooks
-* Fixtures
-* Testes positivos e negativos
-* Automação de Login
-* Automação de Cadastro
-* Validação de formulários
-* Automação de fluxos End-to-End
-* Integração dos testes com CI/CD
-
----
-
-## 📮 Testes de API
-
-Utilizo **Postman** para estudar e realizar testes de APIs REST, trabalhando com:
-
-* Métodos GET, POST, PUT, PATCH e DELETE
-* Headers
-* Body
-* Query Parameters
-* Path Parameters
-* Status Codes
-* Validação de respostas
-* Variáveis de ambiente
-* Collections
-* Scripts de testes
-* Automação de validações de API
 
 ---
 
@@ -179,7 +139,3 @@ https://www.linkedin.com/in/thiago0cascaes/
 https://github.com/thiagocascaes
 
 ---
-
-### 🚀 Qualidade não é apenas encontrar bugs.
-
-É ajudar a construir um produto melhor desde o início.
